@@ -1,0 +1,45 @@
+﻿@model List<Claim>
+@* the claim model will be referenced to utilize the varibales *@
+
+    <h1>Claim History</h1> @* processed claims will appear here *@ 
+    <p>Here you will find previously processed claims</p>
+     
+    @* claims will be stored in a table *@
+   @*  https://www.w3schools.com/html/html_tables.asp *@
+    <table class="table">
+        <tabehead>
+            <tr>
+                <th>ClaimID</th>
+                <th>Lecturer Name</th>
+                <th>Hours Worked</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+            </tr>
+        </tabehead>
+       <tablebody>
+        @foreach(var claim in Model) @* displays all the claims stored in ClaimHistory *@
+        {
+            <tr>
+                <td>@claim.ClaimId</td>
+                <td>@claim.LecturerName</td>
+                <td>@claim.HoursWorked</td>
+                <td>@(claim.HoursWorked * claim.HourlyRate)</td>
+                <td>
+                    @if (claim.Status == ClaimStatus.Pending)
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span> @* label displayed if the claim is still pending https://www.w3schools.com/bootstrap/bootstrap_badges_labels.asp*@
+
+                    }
+                    else if (claim.Status == ClaimStatus.Approved)
+                    {
+                        <span class="badge bg-success text-white">Approved</span> @* label displayed if the claim is approved https://www.w3schools.com/bootstrap/bootstrap_badges_labels.asp*@
+                    }
+                    else if (claim.Status == ClaimStatus.Rejected)
+                    {
+                        <span class="badge bg-danger text-white">Rejected</span> @* label displayed if the claim is rejected https://www.w3schools.com/bootstrap/bootstrap_badges_labels.asp*@
+                    }
+                </td>
+            </tr>
+        }
+    </tablebody>
+    </table>

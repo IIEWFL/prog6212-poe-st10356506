@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@* home page which will be displayed as soon as the users opens the application *@
+@* https://www.w3schools.com/html/html_css.asp *@
+<div class="text-center">
+    <h1>Welcome to the Contract Monthly Claim System (CMCS)</h1>
+
+    <p>
+        This system allows lecturers to submit claims for the hours worked, which are then reviewed and approved by coordinators and managers.
+    </p>
+
+    <hr />
+
+    <div>
+        <h3>Available Features</h3>
+        <ul>
+            <li><strong>Submit Claims:</strong> Lecturers can submit claims with necessary documents.</li>
+            <li><strong>Verify Claims:</strong> Programme Coordinators and Managers can process claims.</li>
+            <li><strong>View Claim History:</strong> Access a history of approved or rejected claims.</li>
+            <li><strong>Claim Status:</strong> Transparently track the status of pending claims.</li>
+            <li><strong>Submit Documents:</strong> Submit supporting documents for each claim.</li>
+        </ul>
+    </div>
+
+    <br />
+    <div>
+        @* buttons to direct the user to the submit claim form and claim history form https://www.w3schools.com/html/html_links.asp*@
+        <a class="btn btn-primary" href="@Url.Action("ClaimForm", "Claim")">Submit a New Claim </a>
+        
+        <a class="btn btn-secondary" href="@Url.Action("ClaimHistory", "Claim")">View Claim History</a>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model List<CMCS_Application.Models.Claim> 
+@* the claim list will be referenced to utilize the varibales *@
+
+    <div class="container my-4">
+        <h2 class="mb-4">Claim List</h2>
+        <p class="lead">Here you will be able to view all your claims and submit a new claim.</p>
+        <a href="@Url.Action("ClaimForm", "Claim")" class="btn btn-primary mb-3">Submit New Claim</a> 
+        <div class="row">
+
+        @if (Model != null && Model.Any()) @* display all claims in the model in a table*@
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                @* all the claim details will be displayed on cards and these are the variables *@
+                       @*  https://www.w3schools.com/html/html_table_headers.asp *@
+
+                <th>Claim ID</th>
+                <th>Lecturer Name</th>
+                <th>Email</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Notes</th>
+                <th>Documents</th>
+            </tr>
+        </thead>
+        <tbody>
+                    @foreach (var claim in Model) @* display all the claims in the model https://stackoverflow.com/questions/69071518/how-to-display-data-from-model-in-html-table-in-net-core-cshtml*@
+            {
+               @*  displays the data stored in each variable *@
+               @*  https://www.w3schools.com/html/html_tables.asp *@
+
+                <tr>
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.LecturerName</td>
+                    <td>@claim.LecturerEmail</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.HourlyRate.ToString("C")</td>
+                    <td>@(claim.HoursWorked * claim.HourlyRate)</td> @* calculates the total claim amount *@
+                    <td>
+                        @if (claim.Status == ClaimStatus.Pending) //if claim is pending
+                        {
+                            <span class="badge bg-warning text-dark">Pending</span>
+               
+                        }
+                        else if (claim.Status == ClaimStatus.Approved)
+                        {
+                            <span class="badge bg-success text-white">Approved</span> //if claim status is approved
+                        }
+                        else if (claim.Status == ClaimStatus.Rejected)
+                        {
+                            <span class="badge bg-danger text-white">Rejected</span> //if claim status is rejected
+                        }
+                    </td>
+
+                    <td>@claim.AdditionalNotes</td>
+                    <td>
+                        @if (claim.Documents != null && claim.Documents.Any())
+                        {
+                            <ul>
+                                @foreach (var doc in claim.Documents)
+                                {
+                                      <li>@Url.Content(doc)</li> @* display the document names in a list https://www.w3schools.com/html/html_lists.asp*@
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>No documents uploaded</p> @*  if the user didnt upload any documents *@
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No claims have been submitted yet.</p> @* this will be displayed if there arent any claims to be verified or if all the claims have been processed *@
+} 
