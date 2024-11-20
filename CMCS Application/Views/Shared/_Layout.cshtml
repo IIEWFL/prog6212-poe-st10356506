@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var username = Context.Session.GetString("Username");
+    var role = Context.Session.GetString("Role");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,18 +27,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li> *@
+                      </li>
+                      @if(role == "Lecturer")
+                      {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Claim" asp-action="Index">Claim</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Claim" asp-action="Index">Submit Claim</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Approval" asp-action="Index">Verify</a>
-                        </li>
-                        <li class="nav-item">
+                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Claim" asp-action="ClaimHistory">Claim History</a>
                         </li>
+                      }
+                      else if (role == "Program Coordinator" || role == "Academic Manager")
+                      {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Approval" asp-action="Index">Review Claims</a>
+                        </li>
+                      }
+                    </ul>
+                    <ul class = "navbar-nav ms-auto">
+                        @if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(role))
+                        {
+                            <li class="nav-item">
+                            <span class="nav-link text-dark">Username: @username, Role: @role </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout</a>
+                        </li>
+                        }
                     </ul>
                 </div>
             </div>

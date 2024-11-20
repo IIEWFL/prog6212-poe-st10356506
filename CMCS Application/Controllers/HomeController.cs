@@ -15,6 +15,10 @@ namespace CMCS_Application.Controllers
 
         public IActionResult Index()
         {
+            var username = HttpContext.Session.GetString("Username");
+            var role = HttpContext.Session.GetString("UserRole");
+            ViewData["Username"] = username;
+            ViewData["UserRole"] = role;
             return View();
         }
 

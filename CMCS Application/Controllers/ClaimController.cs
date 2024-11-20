@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Runtime.CompilerServices;
 using System.Linq.Expressions;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CMCS_Application.Controllers
 {

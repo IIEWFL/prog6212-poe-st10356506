@@ -1,7 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using CMCS_Application.Models;
+using System.Globalization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(60); // Session timeout 
+    options.Cookie.HttpOnly = true; // Prevent client-side script access
+    options.Cookie.IsEssential = true; // Ensure compatibility
+});
+
 
 var app = builder.Build();
 
@@ -18,7 +32,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();  
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
