@@ -60,9 +60,9 @@
                         @if (claim.Documents != null && claim.Documents.Any())
                         {
                             <ul>
-                                @foreach (var doc in claim.Documents)
+                                @foreach (var document in claim.Documents)
                                 {
-                                      <li>@Url.Content(doc)</li> @* display the document names in a list https://www.w3schools.com/html/html_lists.asp*@
+                                      <li>document.FileName</li> @* display the document names in a list https://www.w3schools.com/html/html_lists.asp*@
                                 }
                             </ul>
                         }

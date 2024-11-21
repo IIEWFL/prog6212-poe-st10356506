@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zxNCtJw3tWA4ODGMGl5tmyV8NuA6LCY1avtD6brfvlI=",
+  "Hash": "z84tVHEKF2BQvjL8JqIzqzl1IdJegB9XKPi/QkOxjzY=",
   "Source": "CMCS Application",
   "BasePath": "_content/CMCS Application",
   "Mode": "Default",
@@ -1193,6 +1193,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\HP\\OneDrive\\Documents\\GitHub\\prog6212-poe-st10356506\\CMCS Application\\wwwroot\\uploads\\ice 1 prog.docx",
+      "SourceId": "CMCS Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\OneDrive\\Documents\\GitHub\\prog6212-poe-st10356506\\CMCS Application\\wwwroot\\",
+      "BasePath": "_content/CMCS Application",
+      "RelativePath": "uploads/ice 1 prog.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\ice 1 prog.docx"
     }
   ]
 }

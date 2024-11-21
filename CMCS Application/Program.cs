@@ -2,8 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CMCS_Application.Models;
 using System.Globalization;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//add fluent validation 
+builder.Services.AddControllersWithViews()
+    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AutoReview>());
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

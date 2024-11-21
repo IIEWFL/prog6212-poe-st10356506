@@ -245,6 +245,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\HP\\OneDrive\\Documents\\GitHub\\prog6212-poe-st10356506\\CMCS Application\\wwwroot\\uploads\\ice 1 prog.docx",
+      "PackagePath": "staticwebassets\\uploads\\ice 1 prog.docx"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CMCS Application.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
