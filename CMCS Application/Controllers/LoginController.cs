@@ -13,17 +13,12 @@ namespace CMCS_Application.Controllers
         [HttpPost]
         public IActionResult Login(string username, string role)
         {
-            var UserRole = new List<string> { "Lecturer", "Program Coordinator", "Academic Manager" };
+            var UserRole = new List<string> { "Lecturer", "Program Coordinator", "Academic Manager", "HR" };
 
             if(string.IsNullOrEmpty(username) || !UserRole.Contains(role))
             {
                 ViewBag.Error = "Please enter a username and select your role.";
                 return View();
-            }
-
-            if(role == "Program Coordinator" || role == "Academic Manager")
-            {
-
             }
 
             HttpContext.Session.SetString("Username", username);

@@ -14,6 +14,9 @@ using FluentValidation;
             RuleFor(c => c.HoursWorked)
                 .LessThanOrEqualTo(744)
                 .WithMessage("Hours worked must not exceed total number of hours in a month.");
+           RuleFor(c => c.HoursWorked)
+                .GreaterThanOrEqualTo(1)
+                .WithMessage("At least 1 hour of work is required to submit a claim");
 
             //rule for hourly rate
             RuleFor(c => c.HourlyRate)

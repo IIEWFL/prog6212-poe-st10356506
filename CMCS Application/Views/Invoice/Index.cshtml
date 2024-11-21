@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<Claim>
+
+<h2>HR Dashboard</h2>
+
+<h3>Pending Claims</h3>
+<ul>
+    @foreach (var claim in Model.Where(c => c.Status == ClaimStatus.Pending))
+    {
+            <li>@claim.LecturerName - @claim.TotalAmount - <a href="@Url.Action("ApproveClaim", new { id = claim.ClaimId })">Approve</a> | <a href="@Url.Action("RejectClaim", new { id = claim.ClaimId })">Reject</a></li>
+    }
+</ul>
+
+<h3>Approved Claims</h3>
+<ul>
+    @foreach (var claim in Model.Where(c => c.Status == ClaimStatus.Approved))
+    {
+            <li>@claim.LecturerName - @claim.TotalAmount - <a href="@Url.Action("GenerateInvoice", new { claimId = claim.ClaimId })">Generate Invoice</a></li>
+    }
+</ul>

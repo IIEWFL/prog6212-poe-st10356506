@@ -43,6 +43,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Approval" asp-action="Index">Review Claims</a>
                         </li>
                       }
+                      else if (role == "HR")
+                      {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Invoice" asp-action="Index">View Invoices</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Lecturer" asp-action="Index">View Lecturer</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Lecturer" asp-action="Edit">Edit Lecturer Details</a>
+                        </li>
+                      }
                     </ul>
                     <ul class = "navbar-nav ms-auto">
                         @if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(role))

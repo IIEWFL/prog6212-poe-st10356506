@@ -12,6 +12,7 @@ namespace CMCS_Application.Models
     public string LecturerEmail { get; set;}
     public int HoursWorked { get; set; }
     public int HourlyRate { get; set; }
+    public double TotalAmount { get; set; }
     public string AdditionalNotes { get; set; }
     public ClaimStatus Status { get; set; } = ClaimStatus.Pending; //default status for an unverified claim
     public List<IFormFile> Documents  { get; set; } = new List<IFormFile>();
