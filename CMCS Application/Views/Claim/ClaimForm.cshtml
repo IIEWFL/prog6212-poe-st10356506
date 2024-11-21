@@ -65,9 +65,10 @@
         <p>- Only .pdf, .docx, and .xlsx file types are allowed</p>
         <p>- Only 5 files are allowed</p>
         <label asp-for="Documents" class="form-label">Upload Supporting Documents:</label>
-        <input asp-for="Documents" type="file" id="supportingDocuments" name="files" class="form-control" multiple>
+        <input type="file" name="Documents" class="form-control" multiple />
         <span asp-validation-for="Documents" class="text-danger"></span>
     </div>
+
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -94,7 +95,15 @@
                 //display the output in the calculatedTotal field
                 $("#calculatedTotal").val(`R${calculatedTotal.toFixed(2)}`);  
             });
-        });
+        
+
+           //recalculate total if values are already present on page load
+            const HoursWorked = parseFloat($("#HoursWorked").val()) || 0;
+            const HourlyRate = parseFloat($("#HourlyRate").val()) || 0;
+            const calculatedTotal = HoursWorked * HourlyRate;
+            $("#calculatedTotal").val(`R${calculatedTotal.toFixed(2)}`);
+            });
+
     </script>
 
 </body>

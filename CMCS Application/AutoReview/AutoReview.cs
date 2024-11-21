@@ -25,17 +25,17 @@ using FluentValidation;
                 .MaximumLength(500)
                 .WithMessage("Additional notes cannot exceed 500 characters in length");
 
-        //rules for documents
-        RuleFor(x => x.Documents)
-        .Must(files => files.Count <= 5) //no more than 5 files
-        .WithMessage("You can only upload up to 5 files.");
+            //rules for documents
+           RuleFor(x => x.Documents)
+            .Must(files => files == null || files.Count <= 5) //no more than 5 files
+            .WithMessage("You can only upload up to 5 files.");
 
-        RuleForEach(x => x.Documents)
-            .Must(file => file.Length <= 5 * 1024 * 1024) //5 MB size limit
-            .WithMessage("Each file must be less than 5MB.");
+            RuleForEach(x => x.Documents)
+                .Must(file => file == null || file.Length <= 5 * 1024 * 1024) //5 MB size limit
+                .WithMessage("Each file must be less than 5MB.");
 
-        RuleForEach(x => x.Documents)
-            .Must(file => file.ContentType == "application/pdf" || file.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-            .WithMessage("Only .pdf, .docx, and .xlsx file types are allowed.");
-    }
+            RuleForEach(x => x.Documents)
+                .Must(file => file == null || file.ContentType == "application/pdf" || file.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                .WithMessage("Only .pdf, .docx, and .xlsx file types are allowed.");
+        }
     }

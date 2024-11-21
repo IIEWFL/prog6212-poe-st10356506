@@ -30,15 +30,15 @@ namespace CMCS_Application.Controllers
         //https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-8.0&form=MG0AV3
 
         [HttpPost]
-        public IActionResult ClaimForm(Claim claim, List<IFormFile> files)
+        public IActionResult ClaimForm(Claim claim, List<IFormFile> Documents)
         {
-            claim.Documents = files;
+            claim.Documents = Documents;
             claim.ClaimId = _claimUniqueID++;
 
             //handle file uploads only if files are provided
-            if (files != null && files.Count > 0)
+            if (Documents != null && Documents.Count > 0)
             {
-                claim.Documents = files;
+                claim.Documents = Documents;
             }
             else
             {

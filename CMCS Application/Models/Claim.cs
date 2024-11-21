@@ -14,7 +14,7 @@ namespace CMCS_Application.Models
     public int HourlyRate { get; set; }
     public string AdditionalNotes { get; set; }
     public ClaimStatus Status { get; set; } = ClaimStatus.Pending; //default status for an unverified claim
-        public List<IFormFile> Documents { get; set; } = new List<IFormFile>();
+    public List<IFormFile> Documents  { get; set; } = new List<IFormFile>();
     }
     public enum ClaimStatus
     {
