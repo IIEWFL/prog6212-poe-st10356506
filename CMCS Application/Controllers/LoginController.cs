@@ -45,11 +45,18 @@ namespace CMCS_Application.Controllers
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync("CookieAuth", principal);
 
-            Lecturers.Add(new Lecturer
+            if (role == "Lecturer")
             {
-                LecturerName = username,
-                LecturerEmail = email
-            });
+                var lecturer = new Lecturer
+                {
+                    Id = ClaimMemory.IncrementLecturerId(), // Assign a unique ID
+                    LecturerName = username, // Assuming the username is the lecturer's name
+                    LecturerEmail = email, // Use the email as the lecturer's email
+                    Role = role // Assign the role
+                };
+
+                ClaimMemory.Lecturers.Add(lecturer); // Add to the static list
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -57,6 +64,11 @@ namespace CMCS_Application.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("CookieAuth");
+
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
 
             return RedirectToAction("Index", "Home");
         }

@@ -23,7 +23,7 @@ namespace CMCS_Application.Controllers
 
         //https://stackoverflow.com/questions/61543553/how-to-add-a-button-in-a-asp-net-mvc-and-link-a-click-event-from-c-sharp-code/61543699#61543699
         [HttpGet]
-        [Authorize(Roles = "Lecturer, AcademicManager")]
+        [Authorize(Roles = "Lecturer, Academic Manager")]
         public IActionResult ClaimForm()
         {
             return View();
@@ -66,7 +66,7 @@ namespace CMCS_Application.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Lecturer, AcademicManager")]
+        [Authorize(Roles = "Lecturer, Academic Manager")]
         public IActionResult Index()
         {
             return View(ClaimMemory.SubmittedClaim); //the claims stored in the SubmittedClaim list will be dsiplayed in the index
@@ -107,6 +107,19 @@ namespace CMCS_Application.Controllers
         {
             var history = ClaimMemory.ClaimHistory; //display claims stored in the ClaimHistory list
             return View(history);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Academic Manager, Program Coordinator")]
+        public IActionResult ApproveClaim(int claimId)
+        {
+            var claim = ClaimMemory.ClaimList.FirstOrDefault(c => c.ClaimId == claimId);
+            if (claim != null)
+            {
+                claim.Status = ClaimStatus.Approved; // Set status to Approved
+            }
+
+            return RedirectToAction("Index", "Claim");
         }
     }
 

@@ -1,42 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model List<CMCS_Application.Models.Claim>
+﻿@model List<CMCS_Application.Models.Claim>
 
-<h3>Pending Claims</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Claim ID</th>
-            <th>Lecturer Name</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null && Model.Any())
-        {
-            foreach (var claim in Model.Where(c => c.Status == ClaimStatus.Pending))
-            {
-                <tr>
-                    <td>@claim.ClaimId</td>
-                    <td>@claim.LecturerName</td>
-                    <td>@claim.Status</td>
-                </tr>
-            }
-        }
-        else
-        {
-            <tr>
-                <td colspan="3">No claims available.</td>
-            </tr>
-        }
-
-    </tbody>
-</table>
-
-<h3>Approved Claims Invoices</h3>
+<h3>Approved Claims</h3>
 <table class="table">
     <thead>
         <tr>
@@ -49,23 +13,24 @@
     <tbody>
         @if (Model != null && Model.Any(c => c.Status == ClaimStatus.Approved))
         {
+            // Display only Approved claims
             foreach (var claim in Model.Where(c => c.Status == ClaimStatus.Approved))
             {
                 <tr>
                     <td>@claim.LecturerName</td>
                     <td>@claim.LecturerEmail</td>
-                    <td>@claim.TotalAmount</td>
-                    <a href="@Url.Action("ViewInvoice", "Index")" class="btn btn-secondary">Generate</a>
+                    <td>@(claim.TotalAmount > 0 ? claim.TotalAmount : claim.HoursWorked * claim.HourlyRate)</td>
+                    <td>
+                        <a href="@Url.Action("ViewInvoice", "Invoice", new { claimId = claim.ClaimId })" class="btn btn-primary">Generate</a>
+                    </td>
                 </tr>
             }
-            
         }
         else
         {
             <tr>
-                <td colspan="3">No approved claims available.</td>
+                <td colspan="4">No approved claims available.</td>
             </tr>
         }
     </tbody>
 </table>
-
