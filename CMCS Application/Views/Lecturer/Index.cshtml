@@ -4,6 +4,7 @@
 @{
 }
 @model List<CMCS_Application.Models.Lecturer>
+@* pull data from the lecturer model *@
 
 @{
     ViewData["Title"] = "Lecturer Index";
@@ -11,26 +12,27 @@
 
 <h2>Lecturer List</h2>
 
+@* display all lectuers in list with option to edit info *@
 <table class="table">
     <thead>
-        <tr>
-            <th>Lecturer ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
+       <tr>
+           <th>Lecturer ID</th>
+           <th>Name</th>
+           <th>Email</th>
+           <th>Actions</th>
+       </tr>
     </thead>
     <tbody>
         @foreach (var lecturer in Model)
         {
-                <tr>
-                    <td>@lecturer.Id</td>
-                    <td>@lecturer.LecturerName</td>
-                    <td>@lecturer.LecturerEmail</td>
-                    <td>
-                        <a href="@Url.Action("Edit", "Lecturer", new { id = lecturer.Id })" class="btn btn-primary">Edit</a>
-                    </td>
-                </tr>
+             <tr>
+                 <td>@lecturer.Id</td>
+                <td>@lecturer.LecturerName</td>
+                <td>@lecturer.LecturerEmail</td>
+              <td>
+                 <a href="@Url.Action("Edit", "Lecturer", new { id = lecturer.Id })" class="btn btn-primary">Edit</a>
+             </td>
+            </tr>
         }
     </tbody>
 </table>

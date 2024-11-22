@@ -6,9 +6,12 @@ using FluentValidation;
     {
         public readonly string[] _allowedExtensions = { ".pdf", ".docx", ".xlsx" }; //file types allowed
         private const long _maxFileSize = 5 * 1024 * 1024; //5 MB size limit
- 
-       //here i will set the rules for the claim
-        public AutoReview()
+
+    //here i will set the rules for the claim
+    //https://docs.fluentvalidation.net/en/latest/start.html
+    //https://stackoverflow.com/questions/13877227/fluentvalidation-call-ruleset-and-common-rules
+    //https://stackoverflow.com/questions/26486445/how-to-use-fluentvalidation-within-c-sharp-application
+    public AutoReview()
         {
             //rule for hours worked with a limit of 744 hours
             RuleFor(c => c.HoursWorked)

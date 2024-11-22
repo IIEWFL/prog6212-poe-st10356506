@@ -8,7 +8,7 @@ namespace CMCS_Application.Controllers
     [Authorize]
     public class InvoiceController : Controller
     {
-        // Display all claims
+        //display all claims, only accessible by hr
         [Authorize(Roles = "HR")]
         public IActionResult Index()
         {
@@ -16,31 +16,22 @@ namespace CMCS_Application.Controllers
             return View(claims);
         }
 
-        // Display all approved claims
-        //public IActionResult ApprovedClaims()
-        //{
-        //    // Filter approved claims
-        //    var approvedClaims = ClaimMemory.ClaimHistory
-        //        .Where(c => c.Status == ClaimStatus.Approved)
-        //        .ToList();
-
-        //    return View("Index"); // Pass the filtered list to the view
-        //}
-
-        // View Invoice for a specific claim
+        //view invoice for selected claim
         [Authorize(Roles = "HR")]
         public IActionResult ViewInvoice(int claimId)
         {
-            // Find claim by ID in ClaimHistory
+           
             var claim = ClaimMemory.ClaimHistory.FirstOrDefault(c => c.ClaimId == claimId);
 
+            //only display approved claims
+            //https://stackoverflow.com/questions/53615076/how-to-get-a-list-of-filter-criteria-from-view-to-controller-in-asp-net-mvc
             if (claim == null || claim.Status != ClaimStatus.Approved)
             {
                 ViewBag.ErrorMessage = "No records found.";
                 return View("Error");
             }
 
-            // Set the invoice data
+            //set the invoice data and pull data from invoice model
             var invoiceData = new InvoiceModel
             {
                 LecturerName = claim.LecturerName,
@@ -52,7 +43,7 @@ namespace CMCS_Application.Controllers
                 ClaimStatus = claim.Status.ToString(),
             };
 
-            return View(invoiceData); // Pass the invoice data to the view
+            return View(invoiceData); //pass the invoice data to the view
         }
     }
 }

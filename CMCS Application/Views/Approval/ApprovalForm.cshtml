@@ -11,7 +11,10 @@
 <body>
     <div class="container mt-5">
         <h2>Submit New Claim</h2>
-      
+     @*  form for submitting claim *@
+        @* https://learn.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-8.0&form=MG0AV3&tabs=visual-studio *@
+        @* https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-8.0&form=MG0AV3 *@
+
         <form asp-action="ClaimForm" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label asp-for="LecturerName" class="form-label">Lecturer Name</label>

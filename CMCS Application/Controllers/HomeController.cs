@@ -16,6 +16,8 @@ namespace CMCS_Application.Controllers
 
         public IActionResult Index()
         {
+            //read the username and role from logged in user to display on the home page
+            //https://stackoverflow.com/questions/21688928/asp-net-identity-get-all-roles-of-logged-in-user
             var username = User.Identity?.Name;
             var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
            

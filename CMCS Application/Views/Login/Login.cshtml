@@ -4,8 +4,11 @@
 @{
     ViewData["Title"] = "Login";
 }
+@* view that will log the users into the app *@
 
 <h2>Login</h2>
+@* https://www.w3schools.com/html/html_forms.asp *@
+@* https://www.w3schools.com/html/html_forms_attributes.asp *@
 <form asp-action="Login" method="post">
     <label for="username">Username:</label>
     <input type="text" name="username" id="username" required />
@@ -15,6 +18,7 @@
 
     <label for="role">Role:</label>
     <select name="role" id="role" required>
+       @*  user can select roles from dropdown *@
         <option value="Lecturer">Lecturer</option>
         <option value="Program Coordinator">Program Coordinator</option>
         <option value="Academic Manager">Academic Manager</option>

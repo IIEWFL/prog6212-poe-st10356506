@@ -4,13 +4,14 @@
 @{
 }
 @model CMCS_Application.Models.InvoiceModel
+@* pull data from invoice model *@
 
 @{
     ViewData["Title"] = "Invoice for: " + Model.LecturerName;
 }
 
 <h2>Invoice for @Model.LecturerName</h2>
-
+@* display all the claim details *@
 <div>
     <p><strong>Lecturer Name:</strong> @Model.LecturerName</p>
     <p><strong>Lecturer Email:</strong> @Model.LecturerEmail</p>

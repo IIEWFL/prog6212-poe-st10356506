@@ -12,7 +12,9 @@ namespace CMCS_Application.Controllers
     [Authorize]
     public class ClaimController : Controller
     {
-        private readonly IValidator<Claim> _validator;
+        //validate submitted data
+        private readonly IValidator<Claim> _validator; //https://docs.fluentvalidation.net/en/latest/aspnet.html
+        //increment unique id by 1 for each claim
         private static int _claimUniqueID = 1; //https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members?form=MG0AV3#static-fields
         
 
@@ -23,6 +25,7 @@ namespace CMCS_Application.Controllers
 
         //https://stackoverflow.com/questions/61543553/how-to-add-a-button-in-a-asp-net-mvc-and-link-a-click-event-from-c-sharp-code/61543699#61543699
         [HttpGet]
+        //define which users can access this view
         [Authorize(Roles = "Lecturer, Academic Manager")]
         public IActionResult ClaimForm()
         {
@@ -45,21 +48,24 @@ namespace CMCS_Application.Controllers
             }
             else
             {
-                claim.Documents = new List<IFormFile>();  //ensure an empty list if no files are uploaded
+                claim.Documents = new List<IFormFile>();  //if no files are uploaded it will be null in the list
             }
 
-            ValidationResult result = _validator.Validate(claim);
+            ValidationResult result = _validator.Validate(claim); //validate the data inputted
 
             if (!result.IsValid)
             {
                 foreach(var error in result.Errors)
                 {
+                    //displays an error message if validation fails
+                    //https://docs.fluentvalidation.net/en/latest/aspnet.html
+
                     ModelState.AddModelError("Documents", error.ErrorMessage);
                 }
                 return View(claim);
             }
            
-            ClaimMemory.ClaimList.Add(claim); //add claim to the ClaimList list
+            ClaimMemory.ClaimList.Add(claim); //add claim to the ClaimList list if validation passes
             ClaimMemory.SubmittedClaim.Add(claim); //add claim to the SubmitedClaim list. this is a temporary storage location for the claims which will be removed from the list after it is verified 
 
             return RedirectToAction("Index"); //redirect to index once claim is submitted https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.redirecttoaction?view=aspnetcore-8.0&form=MG0AV3

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CMCS_Application.Controllers
 {
+    //https://learn.microsoft.com/en-us/aspnet/core/security/authentication/?view=aspnetcore-9.0
+    //encrypt whole view and only allow authorized individuals to access the view
     [Authorize]
     public class ApprovalController : Controller
     {

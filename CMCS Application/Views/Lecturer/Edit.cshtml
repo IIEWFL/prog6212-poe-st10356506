@@ -4,14 +4,16 @@
 @{
 }
 @model CMCS_Application.Models.Lecturer
+@* pull data from lecturer model *@
 
 @{
     ViewData["Title"] = "Edit Lecturer";
 }
 
 <h2>Edit Lecturer</h2>
-
-<form asp-action="Edit" method="post">
+@* https://www.w3schools.com/html/html_forms.asp *@
+@* https://www.w3schools.com/html/html_forms_attributes.asp *@
+<form asp-action="Edit" method="post"> @* form to edit the lecturer data *@
     <div class="form-group">
         <label for="LecturerName">Lecturer Name</label>
         <input type="text" class="form-control" id="LecturerName" name="LecturerName" value="@Model.LecturerName" required />
