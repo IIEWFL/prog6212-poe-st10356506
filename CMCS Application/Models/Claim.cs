@@ -1,5 +1,4 @@
-﻿using CMCS_Application.Models;
-
+﻿
 //Claim model containing variables for the claim data to be stored 
 namespace CMCS_Application.Models
 {

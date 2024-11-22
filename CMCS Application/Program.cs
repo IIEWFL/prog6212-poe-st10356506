@@ -6,29 +6,39 @@ using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//add fluent validation 
+// Add FluentValidation
 builder.Services.AddControllersWithViews()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AutoReview>());
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDistributedMemoryCache();
 
+// Add session and distributed cache services
+builder.Services.AddDistributedMemoryCache(); // Adds in-memory storage for session
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(60); // Session timeout 
-    options.Cookie.HttpOnly = true; // Prevent client-side script access
-    options.Cookie.IsEssential = true; // Ensure compatibility
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session timeout
+    options.Cookie.HttpOnly = true; // Makes cookies HTTP-only
+    options.Cookie.IsEssential = true; // Ensures cookies are essential for the app
 });
 
+// Configure cookies for authentication and authorization
+builder.Services.AddAuthentication("CookieAuth")
+    .AddCookie("CookieAuth", options =>
+    {
+        options.LoginPath = "/Login"; // Redirect to login page
+        options.AccessDeniedPath = "/AccessDenied"; // Redirect to access denied page
+        options.Cookie.Name = "UserCookiesDontEat"; // Cookie name
+        options.ExpireTimeSpan = TimeSpan.FromHours(1); // Expiration time
+    });
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Add middleware
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -37,10 +47,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();  
+app.UseAuthentication();
+app.UseSession(); 
 app.UseAuthorization();
-
-app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

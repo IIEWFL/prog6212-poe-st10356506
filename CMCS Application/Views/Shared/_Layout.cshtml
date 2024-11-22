@@ -1,6 +1,9 @@
-﻿@{
-    var username = Context.Session.GetString("Username");
-    var role = Context.Session.GetString("Role");
+﻿@using System.Security.Claims
+
+@{
+    //retieve claim based info
+    var username = User.Identity?.Name;
+    var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 }
 
 <!DOCTYPE html>
@@ -51,10 +54,6 @@
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Lecturer" asp-action="Index">View Lecturer</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Lecturer" asp-action="Edit">Edit Lecturer Details</a>
                         </li>
                       }
                     </ul>

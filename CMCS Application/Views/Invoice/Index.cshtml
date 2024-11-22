@@ -3,22 +3,69 @@
 *@
 @{
 }
-@model List<Claim>
-
-<h2>HR Dashboard</h2>
+@model List<CMCS_Application.Models.Claim>
 
 <h3>Pending Claims</h3>
-<ul>
-    @foreach (var claim in Model.Where(c => c.Status == ClaimStatus.Pending))
-    {
-            <li>@claim.LecturerName - @claim.TotalAmount - <a href="@Url.Action("ApproveClaim", new { id = claim.ClaimId })">Approve</a> | <a href="@Url.Action("RejectClaim", new { id = claim.ClaimId })">Reject</a></li>
-    }
-</ul>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Lecturer Name</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var claim in Model.Where(c => c.Status == ClaimStatus.Pending))
+            {
+                <tr>
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.LecturerName</td>
+                    <td>@claim.Status</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">No claims available.</td>
+            </tr>
+        }
 
-<h3>Approved Claims</h3>
-<ul>
-    @foreach (var claim in Model.Where(c => c.Status == ClaimStatus.Approved))
-    {
-            <li>@claim.LecturerName - @claim.TotalAmount - <a href="@Url.Action("GenerateInvoice", new { claimId = claim.ClaimId })">Generate Invoice</a></li>
-    }
-</ul>
+    </tbody>
+</table>
+
+<h3>Approved Claims Invoices</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Total Amount</th>
+            <th>Generate Invoice</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any(c => c.Status == ClaimStatus.Approved))
+        {
+            foreach (var claim in Model.Where(c => c.Status == ClaimStatus.Approved))
+            {
+                <tr>
+                    <td>@claim.LecturerName</td>
+                    <td>@claim.LecturerEmail</td>
+                    <td>@claim.TotalAmount</td>
+                    <a href="@Url.Action("ViewInvoice", "Index")" class="btn btn-secondary">Generate</a>
+                </tr>
+            }
+            
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">No approved claims available.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

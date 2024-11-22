@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CMCS_Application.Controllers
 {
+    [Authorize]
     public class ClaimController : Controller
     {
         private readonly IValidator<Claim> _validator;
@@ -22,6 +23,7 @@ namespace CMCS_Application.Controllers
 
         //https://stackoverflow.com/questions/61543553/how-to-add-a-button-in-a-asp-net-mvc-and-link-a-click-event-from-c-sharp-code/61543699#61543699
         [HttpGet]
+        [Authorize(Roles = "Lecturer, AcademicManager")]
         public IActionResult ClaimForm()
         {
             return View();
@@ -30,6 +32,7 @@ namespace CMCS_Application.Controllers
         //https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-8.0&form=MG0AV3
 
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public IActionResult ClaimForm(Claim claim, List<IFormFile> Documents)
         {
             claim.Documents = Documents;
@@ -63,12 +66,14 @@ namespace CMCS_Application.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Lecturer, AcademicManager")]
         public IActionResult Index()
         {
             return View(ClaimMemory.SubmittedClaim); //the claims stored in the SubmittedClaim list will be dsiplayed in the index
         }
 
-        //method to store files in the filePaths list
+        //method to store files in the filePaths list and authorization
+        [Authorize(Roles = "Lecturer")]
         public List<string> SaveFile(List<IFormFile> files)
         {
             var filePaths = new List<string>();
@@ -97,6 +102,7 @@ namespace CMCS_Application.Controllers
 
         //method to display the claim history view
         //https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-8.0&form=MG0AV3
+        [Authorize(Roles = "Lecturer")]
         public IActionResult ClaimHistory()
         {
             var history = ClaimMemory.ClaimHistory; //display claims stored in the ClaimHistory list

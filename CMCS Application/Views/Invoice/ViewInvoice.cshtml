@@ -3,3 +3,22 @@
 *@
 @{
 }
+@model CMCS_Application.Models.InvoiceModel
+
+@{
+    ViewData["Title"] = "Invoice for @Model.LecturerName";
+}
+
+<h2>Invoice for @Model.LecturerName</h2>
+
+<div>
+    <p><strong>Lecturer Name:</strong> @Model.LecturerName</p>
+    <p><strong>Lecturer Email:</strong> @Model.LecturerEmail</p>
+    <p><strong>Total Amount:</strong> @Model.TotalAmount</p>
+    <p><strong>Hourly Rate:</strong> @Model.HourlyRate</p>
+    <p><strong>Hours Worked:</strong> @Model.HoursWorked</p>
+    <p><strong>Claim Status:</strong> @Model.ClaimStatus</p>
+    <p><strong>Additional Notes:</strong> @Model.AdditionalNotes</p>
+</div>
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Dashboard</a>

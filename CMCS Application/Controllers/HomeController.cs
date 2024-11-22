@@ -1,6 +1,7 @@
 using CMCS_Application.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace CMCS_Application.Controllers
 {
@@ -15,8 +16,9 @@ namespace CMCS_Application.Controllers
 
         public IActionResult Index()
         {
-            var username = HttpContext.Session.GetString("Username");
-            var role = HttpContext.Session.GetString("UserRole");
+            var username = User.Identity?.Name;
+            var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+           
             ViewData["Username"] = username;
             ViewData["UserRole"] = role;
             return View();

@@ -22,13 +22,13 @@
     <tbody>
         @foreach (var lecturer in Model)
         {
-            <tr>
-                <td>@lecturer.LecturerName</td>
-                <td>@lecturer.LecturerEmail</td>
-                <td>
-                    <a href="@Url.Action("Edit", "Lecturer", new { id = lecturer.Id })" class="btn btn-primary">Edit</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@lecturer.LecturerName</td>
+                    <td>@lecturer.LecturerEmail</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Lecturer", new { id = lecturer.Id })" class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
         }
     </tbody>
 </table>

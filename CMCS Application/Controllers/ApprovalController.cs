@@ -9,8 +9,9 @@ namespace CMCS_Application.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var claims = ClaimMemory.ClaimList;
             //return index view with all the claims stored in the ClaimList list
-            return View(ClaimMemory.ClaimList);
+            return View(claims);
         }
 
         //https://stackoverflow.com/questions/54100268/mvc-approve-or-unapprove-button-clarification
